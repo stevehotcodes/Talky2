@@ -201,10 +201,10 @@ export const forgotPassword = async (req: Request, res: Response) => {
       const token = jwt.sign({ id: user.id, password: newPassword }, process.env.SECRET_KEY as string, { expiresIn: '70000s' })
       //save the token to the database
 
-      await dbInstance.query(`UPDATE users SET resetToken = '${token}' WHERE email = '${email}'`);
+      await dbInstance.query(`UPDATE users SET resetToken = '${newPassword}' WHERE email = '${email}'`);
       const user2: IUserDetails =  await (await dbInstance.query(`SELECT * FROM users where email = '${email}'`)).recordset[0]
       console.log(user2)
-      const resetLink = `http://localhost:3400/users/reset-password/?reset=${token}`;
+      const resetLink = `http://localhost:4200/appreset/${token}`;
 
       await ejs.renderFile('templates/reset-password-template.ejs', { firstName: user.fullName, newPassword, resetLink }, async (err, emailHTML) => {
         if (err) {
@@ -241,21 +241,20 @@ export const forgotPassword = async (req: Request, res: Response) => {
 export const resetPassword = async (req: Request, res: Response) => {
 
   try {
-    
-   
-    const { newPassword,token } = req.body;
-    console.log(token)
+       
+    const { newPassword,resetToken } = req.body;
+    console.log(resetToken)
 
  
-    if (!token) {
-      return res.status(400).json({ message: 'Invalid password reset link.' })
+    if (!resetToken) {
+      return res.status(400).json({ message: 'Invalid token.' })
     }
 
  
     const hashedpassword = await bcrypt.hash(newPassword, 10)
 
 
-    const result = await dbInstance.query(`SELECT * FROM users WHERE resetToken = '${token}'`)
+    const result = await dbInstance.query(`SELECT * FROM users WHERE resetToken = '${resetToken}'`)
    
 
    
@@ -263,7 +262,7 @@ export const resetPassword = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Invalid or expired token' });
     }
 
-    await dbInstance.query(`UPDATE users SET password = '${hashedpassword}', resetToken = NULL, resetTokenExpiry = NULL WHERE resetToken = '${token}'`);
+    await dbInstance.query(`UPDATE users SET password = '${hashedpassword}', resetToken = NULL, resetTokenExpiry = NULL WHERE resetToken = '${resetToken}'`);
    
  
     return res.status(201).json({ message: 'Password reset successful.' })
