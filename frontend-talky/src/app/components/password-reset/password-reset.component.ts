@@ -25,10 +25,6 @@ export class PasswordResetComponent  implements OnInit{
   }
 
   submit(){
-    // console.log(this.resetForm.value.newPassword===this.resetForm.value.confirmPassword)
-    // delete this.resetForm.value.confirmPassword
-    // console.log(this.resetForm.value)
-
     if(this.resetForm.valid){
       if(this.resetForm.value.newPassword===this.resetForm.value.confirmPassword){
         delete this.resetForm.value.confirmPassword
