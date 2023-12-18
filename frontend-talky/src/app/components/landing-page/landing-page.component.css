@@ -1,0 +1,62 @@
+h1{
+    color:white;
+}
+#welcome-wrapper{
+    display :flex;
+    width:90%;
+    height:6rem;
+    margin:0 auto;
+    align-items:center;
+    justify-content: space-between;
+    /* border:2px solid white; */
+}   
+.logo{
+    justify-content: space-between;
+}
+.welcome-divs-wrapper{
+    margin:auto 10px;
+}
+.headline{
+    font-size:40px;
+    padding:7px;
+    font-weight: 700;
+}
+
+#login-signup-wrapper{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    gap:2rem;
+
+    /* border:2px solid red */
+
+}
+#login-signup-wrapper>button{
+    padding:1rem;
+    font-size:1rem;
+    color:white;
+    background-color:#4c94b5;
+    border:none;
+    outline:none;
+    width:7rem;
+    border-radius:2rem;
+    cursor:pointer;
+}
+button:hover{
+    border:2px solid #4c94b5;
+    color:black;
+    background-color:white;
+    
+}
+button{
+    padding:1rem;
+    font-size:1rem;
+    color:white;
+    background-color:#4c94b5;
+    border:none;
+    outline:none;
+    width:7rem;
+    border-radius:2rem;
+    cursor:pointer;
+    margin:0 auto;
+}

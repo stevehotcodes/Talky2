@@ -1,0 +1,12 @@
+
+<!-- <app-side-navigation></app-side-navigation> -->
+<!-- <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+        Contact us
+    </button>
+</mat-dialog-actions> -->
+
+<div id="flash-messages" *ngIf="messages">
+    <app-flashmessages class="{{message.type}}" *ngFor="let message of messages" [message]="message"></app-flashmessages>
+</div>
+<router-outlet></router-outlet>

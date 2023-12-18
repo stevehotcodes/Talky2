@@ -1,0 +1,138 @@
+/* You can add global styles to this file, and also import other style files */
+ @import url('https://fonts.googleapis.com/css2?family=Itim&family=Poppins:ital,wght@0,700;0,800;1,600&display=swap');
+ @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+/* tailwind */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+
+body {
+
+    margin: 0;
+    padding:0;
+   
+}
+app-root {
+    display: flex;
+    
+    /* flex-direction: column; */
+    /* justify-content: space-around; */
+    flex:1;
+    min-height: 100vh;
+    /* width: 100vw; */
+      /* overflow-x:hidden; */
+    /* flex-grow: 1; */
+    /* border: 2px solid red; */
+    background-color: rgb(235, 235, 235);
+    font-size:16px
+}
+
+#flash-messages {
+    position: fixed;
+    z-index: 1;
+    top: 5svh;
+    right: 5svw;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: min(400px, 60svw);
+}
+app-flashmessages {
+    color: white;
+    padding: 0.2rem 0.5rem;
+    font-size: large;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+.error {
+    background-color: red;
+}
+
+.success {
+    background-color: green;
+}
+
+.info {
+    background-color: gray;
+}
+
+app-login,app-sign-up,app-reset-password,app-password-reset{
+    margin:0 auto;
+    flex:1;
+}
+
+/* app-all-posts{
+    border:2px solid red;
+    flex:100%;
+    
+    justify-content: flex-start;
+    gap:11%
+
+} */
+
+
+app-all-posts{
+    /* flex:1; */
+    /* background-color: red; */
+    /* width: 99vw; */
+    /* border:2px solid black; */
+    
+}
+
+
+app-my-posts{
+    /* min-height: 100svh; */
+    /* width: 90%;  */
+    /* border:2px solid blue; */
+     /* display: flex; */
+     /* justify-content: space-around; */
+     /* margin-left:200px;     align-items: center; */
+
+    
+}
+app-profile-view{
+    /* border:11px solid yellow; */
+    background-color: red;
+    /* min-height: 100svh;
+    margin :0 auto;
+    flex:0.9 */
+}
+app-profile-view{
+    /* margin: left 320px; */
+}
+
+app-landing-page{
+    background: url('./assets/Cool-Background-GIF.gif') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    flex:1;
+    display:flex;
+    flex-direction: column;
+    
+    
+    
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+@media screen and (max-width:1623px){
+    app-all-posts,app-my-posts{
+        flex:1;
+        width:100vw;
+        margin:0 auto;
+    }
+   
+ 
+  
+    
+}

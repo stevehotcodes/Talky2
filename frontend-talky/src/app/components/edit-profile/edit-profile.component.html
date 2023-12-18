@@ -1,0 +1,79 @@
+<!-- <p>edit-profile works!</p> -->
+<div class="post-create-container">
+    <button mat-icon-button style="float:right" matDialogClose>
+        <mat-icon>close</mat-icon>
+    </button>
+    <div class="form-container">
+        <header class="mb-[4rem]">
+            <h1>Profile</h1>
+            <div class=" inset-y-0 start-0 flex items-center ps-1 pointer-events-none">
+                <!-- <img class="w-[80px]" src="../../../assets/man.png" alt=""> -->
+                <img [src]="imagePreviewUrl" alt="Image Preview" alt="No Dp" class="w-20px">
+                <div class="flex flex-col space-y-0">
+                  <p class="font-bold text-[1.25rem]">{{loggedinUserDetails.userName}}</p>
+                <p class="italic text-[0.75rem]">{{loggedinUserDetails.fullName}}</p>
+                <p class="italic text-[0.75rem]">{{loggedinUserDetails.email}}</p>
+                <p >Member since : {{loggedinUserDetails.dateJoined}}</p>
+                </div>
+                
+            </div>
+
+            <div class="stats  flex justify-center space-x-3 mt-4">
+              <div class="followers w-[10rem]  border border-black p-3" >
+                <p class="followers-title text-xl ">Followers</p>
+                <p class="text-[2rem] font-bold">{{followers.length}}</p>
+              </div>
+
+              <div class="followers w-[10rem]  border border-black p-3">
+                <p class="followers-title text-xl ">Posts</p>
+                <p class="text-[2rem] font-bold">{{posts.length}}</p>
+              </div>
+
+             
+
+             
+            </div>
+        </header>
+        <form [formGroup]="editProfileForm" class=" ml-7 w-[90%]">
+          <div class="label-input-group">
+            <label>Name</label><br>
+            <input type="text" matInput name="" id="" placeholder="fullname" formControlName="fullName" [(ngModel)]="loggedinUserDetails.fullName" readonly>
+           
+        </div>
+        <div class="label-input-group">
+          <label>User Name</label><br>
+          <input type="text" matInput name="" id="" placeholder="userName" formControlName="userName"[(ngModel)]="loggedinUserDetails.userName">
+         
+      </div>
+      <div class="label-input-group">
+        <label> email</label><br>
+        <input type="text" matInput name="" id="" placeholder="email" formControlName="email" readonly [(ngModel)]="loggedinUserDetails.email">
+       
+    </div>
+    
+    <div class="label-input-group">
+      <label>Bio</label><br>
+      <input type="text" matInput name="" id="" placeholder="bio" formControlName="bio" [(ngModel)]="loggedinUserDetails.bio">
+   
+  </div>
+
+  <div class="label-input-group">
+    <label>password</label><br>
+    <input type="password" matInput name="" id="" placeholder="password" formControlName="password" [(ngModel)]="loggedinUserDetails.password">
+   
+</div>
+<input type="file"  (change)="onFileChange($event)"   accept="image/*" placeholder="upload profile pic" formControlName="profileImageUrl">
+                    <div *ngIf="imagePreviewUrl">
+                      <img [src]="imagePreviewUrl" alt="Image Preview">
+                    </div>
+              <mat-dialog-actions align="end">
+                <button mat-raised-button color="primary" type="submit" (click)="submit()" >Edit</button>
+                <!-- <button mat-raised-button color="warn" matDialogClose="">Cancel</button> -->
+                
+                
+            </mat-dialog-actions>
+          </form>
+          
+    </div>
+
+</div>

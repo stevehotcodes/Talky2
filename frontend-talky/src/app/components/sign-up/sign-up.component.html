@@ -1,0 +1,82 @@
+<div class="signup-container-layout">
+    
+<div class="signup-container">
+    <!--Headline section-->
+    <div class="welcome-note-div">
+        <div class="headline-icon-wrapper">
+            <img src="../../../assets/Talky-12-6-2023.png" alt="" class="">
+            <p class="headline"> New In Talky?</p>
+           
+            
+
+            
+
+
+        </div>
+    </div>
+    <!--Form section-->
+    <div  class="form-wrapper">
+        <img src="../../../assets/Talky-12-6-2023.png" alt="" class="w-[30%]">
+        <h3>Sign up</h3>
+        <form action="" [formGroup]="signupForm" (ngSubmit)="submit()">
+            <div class="label-input-group">
+                <label>Full Name</label><br>
+                <input type="text" matInput name="" id="" placeholder="fullname" formControlName="fullName">
+                <mat-error *ngIf="signupForm.controls['fullName'].touched && signupForm.controls['fullName'].invalid">
+                    <span *ngIf="signupForm!.controls['fullName'].hasError('required')">fullname is mandatory.</span>
+                  </mat-error>
+            </div>
+            <div class="label-input-group">
+                <label>Username</label><br>
+                <input type="text" name="" id="" placeholder="Username" formControlName="userName">
+                <mat-error *ngIf="signupForm.controls['userName'].touched && signupForm.controls['userName'].invalid">
+                    <span *ngIf="signupForm!.controls['userName'].hasError('required')">username is mandatory.</span>
+                  </mat-error>
+            </div>
+
+            <div class="label-input-group">
+                <label>Email</label><br>
+                <input type="text"  matInput name="" id="" placeholder="Email" formControlName="email">
+                <mat-error *ngIf="signupForm.controls['email'].touched && signupForm.controls['email'].invalid">
+                    <span *ngIf="signupForm!.controls['email'].hasError('required')">email is mandatory.</span>
+                    <span *ngIf="signupForm!.controls['email'].hasError('pattern')">Invalid email :Must be in the format of 'example@gmail.com' </span>
+                  </mat-error>
+                
+            </div>
+
+            <div class="label-input-group">
+                <label>Password</label><br>
+                <input type="text"  matInput name="" id="" placeholder="Password" formControlName="password">
+                <mat-error *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].invalid">
+                    <span *ngIf="signupForm!.controls['password'].hasError('required')">password is mandatory.</span>
+                    <span *ngIf="signupForm!.controls['password'].hasError('pattern')">A valid password must contain uppercase,lowercase,special characters, and numbers </span>
+                  
+                  </mat-error>
+            </div>
+
+            <div class="label-input-group">
+                <label>Confirm Password</label><br>
+                <input type="text" name="" id="" placeholder="Confirm Password" formControlName="confirmPassword">
+                <mat-error *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].invalid">
+                    <span *ngIf="signupForm!.controls['password'].hasError('required')">password is mandatory.</span>
+                    <span *ngIf="signupForm!.controls['password'].hasError('pattern')">A valid password must contain uppercase,lowercase,special characters, and numbers </span>
+                  
+                  </mat-error>
+                
+                
+            </div>
+            <div class="label-input-group">
+            
+                <input type="submit"   class="sign-up-btn"  value="Sign up">
+            </div>
+
+            <div class="form-footer">
+                <a routerLink="/login">Already a Talky? Login </a>
+            </div>
+            
+        </form>
+       
+
+    </div>
+</div>
+</div>
