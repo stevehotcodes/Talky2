@@ -21,7 +21,7 @@ const routes: Routes = [
   {path:'myposts',component:MyPostsComponent},
   {path:'talkies',component:TalkiesComponent},
   {path:'profile',component:ProfileViewComponent},
-  {path:'appreset',component:PasswordResetComponent}
+  {path:'appreset/:token',component:PasswordResetComponent}
   
 ];
 

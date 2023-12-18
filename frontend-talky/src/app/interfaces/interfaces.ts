@@ -127,7 +127,7 @@ export interface IEditUserDetails{
 }
 
 export interface IresetPasswordUserData{
-    token:string
+    resetToken:string
     newPassword:string
   }
 
