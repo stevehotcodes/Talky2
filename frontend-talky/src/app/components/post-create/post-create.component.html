@@ -1,5 +1,5 @@
 
-<div class="post-create-container">
+<div class="post-create-container" data-cy="post-create-dialog">
     <button mat-icon-button style="float:right" matDialogClose>
         <mat-icon>close</mat-icon>
     </button>
@@ -11,7 +11,7 @@
             <mat-form-field style="width: 100%;">
               <mat-label>Post content</mat-label>
             
-              <textarea matInput [(ngModel)]="postContent" name="postContent" placeholder="What's happening?"[(ngModel)]="postContent"></textarea >
+              <input type="text" matInput [(ngModel)]="postContent" name="postContent" placeholder="What's happening?"[(ngModel)]="postContent" data-cy="postCaption">
               <!-- <mat-error *ngIf="createPostForm.controls['postContent'].touched && createPostForm.controls['postContent'].invalid">
                 <span *ngIf="createPostForm!.controls['postContent'].hasError('required')">This field is mandatory.</span>
               </mat-error> -->
@@ -33,12 +33,12 @@
               
 
               <mat-dialog-actions align="end">
-                <button mat-raised-button color="primary" type="submit"  (click)="submit() " >Post</button>
+                <button mat-raised-button color="primary" type="submit"  (click)="submit() " data-cy="post-btn">Post</button>
              
-                
+                <button mat-raised-button color="warning"  type="submit" data-cy="btn-cancel">Cancel</button>
                 
             </mat-dialog-actions>
-            <input type="file"  (change)="onFileChange($event)"   accept="image/*">
+            <input type="file"  (change)="onFileChange($event)"   accept="image/*"   data-cy="postImage">
                     <div *ngIf="imagePreviewUrl">
                       <img [src]="imagePreviewUrl" alt="Image Preview">
                     </div>

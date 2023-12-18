@@ -54,7 +54,7 @@
                 </div>
            
             <mat-dialog-actions class="mt-2 ml-2">
-                <button mat-raised-button color="primary" (click)="openDialog()">
+                <button mat-raised-button color="primary" (click)="openDialog()" data-cy="create-post-btn">
                     Create Post
                 </button>
             </mat-dialog-actions>
@@ -68,7 +68,7 @@
           
           <!-- post icons -->
         
-        <main class="2xl:ml-[--w-side] xl:ml-[--w-side-md] md:ml-[--w-side-small] mt-2" *ngFor="let item of posts ;let i = index" >
+        <main class=" posts 2xl:ml-[--w-side] xl:ml-[--w-side-md] md:ml-[--w-side-small] mt-2" *ngFor="let item of posts ;let i = index" >
         
         <div class="main__inner">
         
