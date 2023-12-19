@@ -81,6 +81,14 @@ describe('First', () => {
 
     })
 
+    it('likes a post',()=>{
+        cy.visit("http://localhost:4200/all")
+        cy.get('.like-div').click()
+        
+
+    
+    })
+
 
     
 

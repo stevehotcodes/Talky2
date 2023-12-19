@@ -32,7 +32,6 @@ export class AllPostsComponent implements OnInit {
           console.log(res) 
           this.posts=res
           console.log(this.posts)
-          
       },
       err=>{
         console.log(err)
@@ -68,6 +67,7 @@ export class AllPostsComponent implements OnInit {
       })
       
       this.commentContent=''
+      // window.location.reload()
       
     },
   
@@ -111,8 +111,19 @@ toggleClickEvent(i:number){
 
 addAliketoPost(postID:string){
   this.likesSvc.addLikeToPost(postID).subscribe(
-    res=>{
-       console.log(res)
+    (res:any)=>{
+       this.flashSvc.pushMessage({
+        type:'success',
+        message:res.message
+       })
+      //  window.location.reload()
+    },
+    (message:any)=>{
+      this.flashSvc.pushMessage({
+        type:'error',
+        message:'You already liked this post'
+      })
+      // window.location.reload()
     }
   )
 }

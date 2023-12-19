@@ -66,7 +66,7 @@
   
   <!-- post icons -->
 
-<main class="2xl:ml-[--w-side] xl:ml-[--w-side-md] md:ml-[--w-side-small] mt-2" *ngFor="let post of posts">
+<main class="2xl:ml-[--w-side] xl:ml-[--w-side-md] md:ml-[--w-side-small] mt-2" *ngFor="let post of posts;let i = index">
 
 <div class="main__inner">
 
@@ -129,19 +129,19 @@
 
                </button>
 
-          <a href="#">1,300</a>
+          <a href="#">{{post.commentCount}}</a>
 
       </div>
 
       <div class="flex items-center gap-3">
 
-          <button type="button" class="button__ico  dark:bg-slate-700 w-[30px] ">
+          <button type="button" class="button__ico  dark:bg-slate-700 w-[30px] " (click)="addAliketoPost(post.postID)">
             <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M320 458.16S304 464 256 464s-74-16-96-32H96a64 64 0 01-64-64v-48a64 64 0 0164-64h30a32.34 32.34 0 0027.37-15.4S162 221.81 188 176.78 264 64 272 48c29 0 43 22 34 47.71-10.28 29.39-23.71 54.38-27.46 87.09-.54 4.78 3.14 12 7.95 12L416 205" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M416 271l-80-2c-20-1.84-32-12.4-32-30h0c0-17.6 14-28.84 32-30l80-4c17.6 0 32 16.4 32 34v.17A32 32 0 01416 271zM448 336l-112-2c-18-.84-32-12.41-32-30h0c0-17.61 14-28.86 32-30l112-2a32.1 32.1 0 0132 32h0a32.1 32.1 0 01-32 32zM400 464l-64-3c-21-1.84-32-11.4-32-29h0c0-17.6 14.4-30 32-30l64-2a32.09 32.09 0 0132 32h0a32.09 32.09 0 01-32 32zM432 400l-96-2c-19-.84-32-12.4-32-30h0c0-17.6 13-28.84 32-30l96-2a32.09 32.09 0 0132 32h0a32.09 32.09 0 01-32 32z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
            
                 like
                </button>
 
-          <span>260</span>
+          <span>{{post.likeCount}}</span>
 
       </div>
 
@@ -161,88 +161,51 @@
 
   <!-- comments -->
 
-  <div class="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40"> 
+  <div  *ngIf="postCommentStates[post.postID]"  lclass="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40"> 
+    <button *ngIf="!toggleClickEvent" type="button" class="button__ico" (click)="toggleShowComment(post.postID,i)"> 
 
-      <div class="flex items-start gap-3 relative">
+        show comments
+
+      </button>
+      <button  *ngIf="toggleClickEvent"   type="button" class="button__ico" (click)="toggleShowComment(post.postID,i)"> 
+
+        hide comments
+
+      </button>
+      <div class="flex items-start gap-3 relative" *ngFor="let comment of comments" >
+       
 
           <a href="profile.html"> <img src="../../../assets/man.png" alt="" class="w-10 h-10 mt-1 rounded-full"> </a>
 
           <div class="flex-1">
 
-              <a href="profile.html" class="text-black font-medium inline-block dark:text-white"> Steeve </a>
+              <a href="profile.html" class="text-black font-medium inline-block dark:text-white"> {{comment.commentedBy}} </a>
 
-              <p class="mt-0.5"> I love taking photos of nature and animals. 🌳🐶</p>
+              <p class="mt-0.5"> {{comment.commentContent}} 🌳🐶</p>
 
           </div>
 
       </div>
 
-      <div class="flex items-start gap-3 relative">
-
-          <a href="profile.html"> <img src="../../../assets/man.png" alt="" class="w-10 h-10 mt-1 rounded-full"> </a>
-
-          <div class="flex-1">
-
-              <a href="profile.html" class="text-black font-medium inline-block dark:text-white"> Caleb </a>
-
-              <p class="mt-0.5">  I enjoy people and emotions. 😊😢 </p>
-
-          </div>
-
-      </div> 
-
-      <div class="flex items-start gap-3 relative">
-
-          <a href="profile.html"> <img src="../../../assets/man.png" alt="" class="w-10 h-10 mt-1 rounded-full"> </a>
-
-
-          <div class="flex-1">
-
-              <a href="profile.html" class="text-black font-medium inline-block dark:text-white"> Daniel </a>
-
-              <p class="mt-0.5">  Photography is my passion. 🎨📸   </p>
-
-          </div>
-
-      </div>
+      
 
   </div>
 
   <!-- add comment -->
-
+  <button (click)="toggleCommentInput(post.postID)">Add Comment</button>
   <div class="sm:px-4 sm:py-3 p-2.5 border-t border-gray-100 flex items-center gap-1 dark:border-slate-700/40">
 
       <img src="../../../assets/chatbubbles-outline.svg" alt="" class="w-6 h-6 rounded-full">
 
-      <div class="flex-1 relative overflow-hidden h-10">
-
-          <textarea placeholder="Add Comment...." rows="1" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent"></textarea>
-
-          <div class="!top-2 pr-2" uk-drop="pos: bottom-right; mode: click">
-
-              <div class="flex items-center gap-2" uk-scrollspy="target: > svg; cls: uk-animation-slide-right-small; delay: 100 ;repeat: true">
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-sky-600">
-
-                      <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-
-                  </svg>
-
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 fill-pink-600">
-
-                      <path d="M3.25 4A2.25 2.25 0 001 6.25v7.5A2.25 2.25 0 003.25 16h7.5A2.25 2.25 0 0013 13.75v-7.5A2.25 2.25 0 0010.75 4h-7.5zM19 4.75a.75.75 0 00-1.28-.53l-3 3a.75.75 0 00-.22.53v4.5c0 .199.079.39.22.53l3 3a.75.75 0 001.28-.53V4.75z" />
-
-                  </svg>
-
-              </div>
-
-          </div>
+      <ng-container *ngIf="postCommentStates[post.postID]" class="sm:px-4 sm:py-3 p-2.5 border-t border-gray-100 flex items-center gap-1 dark:border-slate-700/40">
+        <form class="flex-1 flex relative overflow-hidden h-10" (ngSubmit)="submitComment(post.postID)">
+          <input  placeholder="Add Comment...." rows="1" class="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent" [(ngModel)]="commentContent" name="comment">
+          <button type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery bg-[#0E2A47] text-white">Post</button>
+        </form>
+      </ng-container>
 
 
-      </div>
-
-
-      <button type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery bg-[#0E2A47] text-white "> Post</button>
+    
 
   </div> 
 

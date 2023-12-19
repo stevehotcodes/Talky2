@@ -109,7 +109,8 @@ export interface IUserDetails{
     fullName:string
     userName:string
     profileImagUrl:string
-    likesCount:number
+    likeCount:number
+    commentCount:number
 }
 
 export interface IgetFollowers{
