@@ -1,5 +1,5 @@
 <!-- <p>edit-profile works!</p> -->
-<div class="post-create-container">
+<div class="post-create-container" id="post-create-container">
     <button mat-icon-button style="float:right" matDialogClose>
         <mat-icon>close</mat-icon>
     </button>
@@ -37,37 +37,37 @@
         <form [formGroup]="editProfileForm" class=" ml-7 w-[90%]">
           <div class="label-input-group">
             <label>Name</label><br>
-            <input type="text" matInput name="" id="" placeholder="fullname" formControlName="fullName" [(ngModel)]="loggedinUserDetails.fullName" readonly>
+            <input type="text" matInput name="" id="fullname" placeholder="fullname" formControlName="fullName" [(ngModel)]="loggedinUserDetails.fullName" readonly>
            
         </div>
         <div class="label-input-group">
           <label>User Name</label><br>
-          <input type="text" matInput name="" id="" placeholder="userName" formControlName="userName"[(ngModel)]="loggedinUserDetails.userName">
+          <input type="text" matInput name="" id="username" placeholder="userName" formControlName="userName"[(ngModel)]="loggedinUserDetails.userName">
          
       </div>
       <div class="label-input-group">
         <label> email</label><br>
-        <input type="text" matInput name="" id="" placeholder="email" formControlName="email" readonly [(ngModel)]="loggedinUserDetails.email">
+        <input type="text" matInput name="" id="email" placeholder="email" formControlName="email" readonly [(ngModel)]="loggedinUserDetails.email">
        
     </div>
     
     <div class="label-input-group">
       <label>Bio</label><br>
-      <input type="text" matInput name="" id="" placeholder="bio" formControlName="bio" [(ngModel)]="loggedinUserDetails.bio">
+      <input type="text" matInput name="" id="bio" placeholder="bio" formControlName="bio" [(ngModel)]="loggedinUserDetails.bio">
    
   </div>
 
   <div class="label-input-group">
     <label>password</label><br>
-    <input type="password" matInput name="" id="" placeholder="password" formControlName="password" [(ngModel)]="loggedinUserDetails.password">
+    <input type="password" matInput name="" id="password" placeholder="password" formControlName="password" [(ngModel)]="loggedinUserDetails.password">
    
 </div>
-<input type="file"  (change)="onFileChange($event)"   accept="image/*" placeholder="upload profile pic" formControlName="profileImageUrl">
+<input type="file" id="fileUpload"  (change)="onFileChange($event)"   accept="image/*" placeholder="upload profile pic" formControlName="profileImageUrl">
                     <div *ngIf="imagePreviewUrl">
                       <img [src]="imagePreviewUrl" alt="Image Preview">
                     </div>
               <mat-dialog-actions align="end">
-                <button mat-raised-button color="primary" type="submit" (click)="submit()" >Edit</button>
+                <button mat-raised-button color="primary" type="submit" (click)="submit()"  id="edit-btn">Edit</button>
                 <!-- <button mat-raised-button color="warn" matDialogClose="">Cancel</button> -->
                 
                 

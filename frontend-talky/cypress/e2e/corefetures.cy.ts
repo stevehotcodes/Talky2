@@ -30,7 +30,6 @@ describe('First', () => {
         cy.get('[data-cy=email]').type('jondoe@gmail.com')
         cy.get('[data-cy=userName]').type('John Doe')
         cy.get('[data-cy=password]').type('JohnDoe123@')
-        // cy.get('[data-cy=password]').type('John Doe')
         cy.get('[data-cy=confirmPassword').type('JohnDoe123@');
          cy.get('[data-cy="create-user-btn"]').click()
     })
@@ -38,61 +37,96 @@ describe('First', () => {
     it('logins a new user',()=>{
         cy.visit('http://localhost:4200/login')
         cy.get('[data-cy=email]').type('jondoe@gmail.com')
-        // cy.get('[data-cy=userName]').type('John Doe')
         cy.get('[data-cy=password]').type('JohnDoe123@')
         cy.get('[data-cy="login"]').click()
 
     })
 
-    // it("checks if there are posts" , ()=>{
-        
-
-    //     cy.get('posts').should('have.length.greaterThan', 1)
-    // })
+   
 
     it('checks if posts are loaded into the page',()=>{
         cy.visit("http://localhost:4200/all")
-        // cy.get('posts').should('exist');
-        // cy.get('[data-cy=create-post-btn]').click()
-      
-
-        
+               
     })
 
     it('create a post ',()=>{
         cy.visit("http://localhost:4200/all")
         cy.get('[data-cy=create-post-btn]').click()
         cy.get('[data-cy=post-create-dialog]').should('be.visible');
-        // cy.get('[data-cy=create-post-btn]').click();
-        const testImage='cypress/fixtures/example.json'
-        // cy.get('[data-cy=postCaption]').type("This is a new automated post caption")
-        // // cy.fixture(testImage).then((fileContent) => {
-        // //     cy.get('[data-cy=postImage]').invoke('val', fileContent);
-
-        // //   });
-         
-
-        //   cy.get('[data-cy=btn-cancel]').click()
-          cy.location('pathname').should('to.equal', '/all')
-          cy.visit("http://localhost:4200/all")
-          
-        
-        
+         cy.location('pathname').should('to.equal', '/all')
+       cy.visit("http://localhost:4200/all")     
 
     })
 
-    it('likes a post',()=>{
+    it('conteains the post comment modal',()=>{
         cy.visit("http://localhost:4200/all")
-        cy.get('.like-div').click()
-        
+        cy.get('.button__ico').contains("likes").click()
 
     
     })
+ 
+    it('should access the value of the show comments button', () => {
+        cy.visit('http://localhost:4200/all');
+      
+        cy.get('.button__ico').contains('show comments').as('buttonText');
+        cy.get('@buttonText').then((text) => {
+          cy.log(`Button text: ${text}`);
+        });
+               
+      });
 
 
+      it('should have a button value of  add comments',()=>{
+        cy.visit('http://localhost:4200/all');
+
+        cy.get('#add-comment').click();
+      
+        cy.get('#add-comment').click();
     
+      
+       
+      })
+
+      it('should add comment',()=>{
+        cy.visit('http://localhost:4200/all');
+        cy.get('#add-comment').click();
+        cy.get('#comment-input').should('be.visible');
+        cy.get("#comment-input").type("fake comments")
+        cy.get("#post-comment").click()
+        cy.visit('http://localhost:4200/all')
+       
+      })
+
+      it('view my profile',()=>{
+        cy.visit("http://localhost:4200/myposts")
+        cy.get('#view-profile').click()
+        cy.go('back')
+      })
+
+      it('should view my and edit profile',()=>{
+        cy.visit('http://localhost:4200/profile')
+        cy.get('#edit-profile').click()
+        cy.get('#post-create-container').should('be.visible').then(()=>{
+            cy.get('#post-create-container').find("#username").type("fake username")
+            cy.get('#post-create-container',).find("#email").type(" fake email",{force: true})
+            cy.get('#post-create-container').find("#bio").type("fake bio")
+            cy.get('#post-create-container').find("#password").type( " fake password")
+            const filePath = 'cypress/fixtures/cat-8282097_1280.jpg';
+            cy.get('input[type=file]').selectFile(filePath);
+            cy.get("#edit-btn").click()
+            cy.go('back')
+            cy.visit('http://localhost:4200/profile')
+
+
+        });
+        
+       
+      })
+  
 
 
         
     })
 
+
+  
