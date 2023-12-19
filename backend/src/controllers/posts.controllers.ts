@@ -4,6 +4,7 @@ import { ExtendedUser } from "../middlewares/verifyToken"
 // import { IUserDetails, User } from "../interfaces/user.interfaces";
 import DatabaseHelper from "../helpers/dbConnection.helper";
 import {  IPosts, IPostsWithUserDetails } from '../interfaces/posts.interface';
+import { ICommentWithUserAndPostInfo } from '../interfaces/comments.interface';
 
 const dbInstance = DatabaseHelper.getInstance()
 
@@ -116,13 +117,14 @@ export const deletePost = async (req: ExtendedUser, res: Response) => {
 export const getOnePost =async(req:Request , res:Response)=>{
     try{
         let {id}=req.params
-        let post:IPosts =await(await dbInstance.exec('getOnePost',{id})).recordset[0]
+        let post:IPostsWithUserDetails[] =(await dbInstance.exec('getOnePost',{id})).recordset
+        let comments:ICommentWithUserAndPostInfo[] = (await dbInstance.exec('getAllComments', { postID:id })).recordset;
         post?console.log("here is the post your are trying to fetch",post):console.log("no post found")
         if(!post){
             return res.status(404).json({message:"post was not found"})
            
         }
-        return res.status(200).json({post:post})
+        return res.status(200).json({post,comments})
 
     }
     catch(error:any){

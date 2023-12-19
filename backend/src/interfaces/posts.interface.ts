@@ -20,6 +20,7 @@ export interface IPostsWithUserDetails{
     userName:string
     profileImagUrl:string
     likesCount:number
+    commentCount:number
 }
 
 
