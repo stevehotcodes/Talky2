@@ -4,6 +4,9 @@ CREATE OR ALTER PROCEDURE getFollowers(
     )
 AS
 BEGIN 
-    SELECT * FROM followers
+    SELECT users.fullName, users.userName, users.profileImageUrl, followers.*
+     FROM followers
+    LEFT JOIN users 
+    ON followers.followingID=users.id
     WHERE followerID=@followerID
 END
