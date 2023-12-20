@@ -11,6 +11,8 @@ import { ProfileViewComponent } from './components/profile-view/profile-view.com
 import {DeActivateGuard } from './guards/deActivate.guard';
 import { UserGuard } from './guards/user.guard';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { FollowersComponent } from './components/followers/followers.component';
+import { FollowingsComponent } from './components/followings/followings.component';
 
 const routes: Routes = [
   {path:'',component:LandingPageComponent},
@@ -21,6 +23,8 @@ const routes: Routes = [
   {path:'myposts',component:MyPostsComponent},
   {path:'talkies',component:TalkiesComponent},
   {path:'profile',component:ProfileViewComponent},
+  {path:'followers',component:FollowersComponent},
+  {path:'followings',component:FollowingsComponent},
   {path:'appreset/:token',component:PasswordResetComponent}
   
 ];

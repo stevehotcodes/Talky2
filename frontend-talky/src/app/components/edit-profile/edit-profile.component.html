@@ -3,12 +3,12 @@
     <button mat-icon-button style="float:right" matDialogClose>
         <mat-icon>close</mat-icon>
     </button>
-    <div class="form-container">
+    <div class="form-container m-[2rem]">
         <header class="mb-[4rem]">
             <h1>Profile</h1>
             <div class=" inset-y-0 start-0 flex items-center ps-1 pointer-events-none">
                 <!-- <img class="w-[80px]" src="../../../assets/man.png" alt=""> -->
-                <img [src]="imagePreviewUrl" alt="Image Preview" alt="No Dp" class="w-20px">
+                <img [src]="imagePreviewUrl" alt="Image Preview" alt="No Dp" class="w-[20px]">
                 <div class="flex flex-col space-y-0">
                   <p class="font-bold text-[1.25rem]">{{loggedinUserDetails.userName}}</p>
                 <p class="italic text-[0.75rem]">{{loggedinUserDetails.fullName}}</p>
@@ -18,13 +18,13 @@
                 
             </div>
 
-            <div class="stats  flex justify-center space-x-3 mt-4">
+            <div class="stats  flex justify-center space-x-3 mt-4 ml-6">
               <div class="followers w-[10rem]  border border-black p-3" >
-                <p class="followers-title text-xl ">Followers</p>
+                <p class="followers-title text-xl ">Followings</p>
                 <p class="text-[2rem] font-bold">{{followers.length}}</p>
               </div>
 
-              <div class="followers w-[10rem]  border border-black p-3">
+              <div class="followers w-[10rem]  border border-black p-3 mr-6">
                 <p class="followers-title text-xl ">Posts</p>
                 <p class="text-[2rem] font-bold">{{posts.length}}</p>
               </div>

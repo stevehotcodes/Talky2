@@ -14,6 +14,12 @@ export class ProfileViewComponent implements OnInit {
 
   loggedinUserDetails!:IUserDetails
   id!:string
+
+  isFollowersOn: boolean = false;
+  isFollowingOn: boolean = false;
+  isActive:boolean=false
+  isNone:string='none'
+
   constructor(private matDialog:MatDialog,private userSvc:UsersService){}
 
 
@@ -36,9 +42,20 @@ export class ProfileViewComponent implements OnInit {
 
   openDialog(){
     this.matDialog.open(EditProfileComponent,{
-      width:'500px',
-      height:"30rem"
+      width:'50%',
+      height:"95svh"
     })
+  }
+
+  toggleFollowing(){
+    this.isFollowersOn=true
+    this.isFollowingOn=false
+    this.isActive=!this.isActive
+  }
+  toggleViewFollowers(){
+    this.isFollowingOn=true
+    this.isFollowersOn=false
+    this.isActive=!this.isActive
   }
 
 }

@@ -31,6 +31,8 @@ import { InterceptorService } from './services/interceptor.service';
 import { FlashmessagesComponent } from './components/flashmessages/flashmessages.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
+import { FollowersComponent } from './components/followers/followers.component';
+import { FollowingsComponent } from './components/followings/followings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +52,8 @@ import { PasswordResetComponent } from './components/password-reset/password-res
      FlashmessagesComponent,
      CommentComponent,
      PasswordResetComponent,
+     FollowersComponent,
+     FollowingsComponent,
     
   
   
