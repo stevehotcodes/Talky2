@@ -33,6 +33,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { FollowersComponent } from './components/followers/followers.component';
 import { FollowingsComponent } from './components/followings/followings.component';
+import { SearchPipe } from './pipes/search.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,7 @@ import { FollowingsComponent } from './components/followings/followings.componen
      PasswordResetComponent,
      FollowersComponent,
      FollowingsComponent,
+     SearchPipe,
     
   
   

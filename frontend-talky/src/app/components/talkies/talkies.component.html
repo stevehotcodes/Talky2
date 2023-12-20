@@ -62,7 +62,7 @@
                     </svg>
                 </div>
                 <input type="search" id="default-search" class="block w-[30rem]  mt-[17px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="search talkies" required>
-                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" [(ngModel)]="searchText">Search</button>
             </div>
         </form>
       
@@ -74,7 +74,7 @@
       <div class=" profile-cards-wrapper flex  flex-wrap items-center justify-center space-x-3 bg-30 w-[100%] ">
     
     
-        <div class="people-profile-cards  flex  flex-col  items-center p-6 mt-4 bg-white  justify-around gap-x-[0.21rem] border border-gray-100 w-[15rem]  h-[15rem]" *ngFor="let talkie of talkies; let i=index">
+        <div class="people-profile-cards  flex  flex-col  items-center p-6 mt-4 bg-white  justify-around gap-x-[0.21rem] border border-gray-100 w-[15rem]  h-[15rem]" *ngFor="let talkie of talkies|search:searchText; let i=index">
             <img src="{{talkie.profileImageUrl}}" alt="no profile pic" class="w-[70px] ">
             <a  (mouseover)="openDialog()">{{talkie.userName}}</a>
             <button type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery bg-[#0E2A47] text-white " (click)="toggleFollowingState(talkie.id)" > {{ getButtonText(talkie.id) }}</button>

@@ -12,20 +12,24 @@ import { FollowersService } from 'src/app/services/followers.service';
 })
 export class TalkiesComponent implements OnInit{
   talkies:IUserDetails[]=[]
+  searchText='';
   isFollowing:boolean =false
   followingStates: { [followingID: string]: boolean } = {};
 
   constructor(private matDialog:MatDialog,private userSvc:UsersService,private followSvc:FollowersService){}
 
   ngOnInit(): void {
-     this.userSvc.getAllUser().subscribe(
+    this.getAllTalkies()
+  }
+
+
+
+  getAllTalkies(){
+    this.userSvc.getAllUser().subscribe(
       res=>{
        this.talkies=res
        console.log(this.talkies)
 
-      //  this.talkies.forEach(user => {
-      //   this.followingStates[user.id] = false; // Set to false initially
-      // });
       }
      )
   }
