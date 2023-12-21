@@ -43,7 +43,7 @@ export const verifyToken = (
 
 export const accountRequired =(req:ExtendedUser, res:Response, next:NextFunction)=>{
   const error = verifyToken(req, res)
-  if (error) { console.log("account is required");return error}
+  if (error) { console.log("Unauthorized");return error}
   next()
 }
 

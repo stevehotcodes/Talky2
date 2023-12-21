@@ -36,3 +36,5 @@ app.use('/followers',followerRouter)
 app.listen(port,()=>{
     console.log("Express Server is running on port ", port)
 })
+
+export default app

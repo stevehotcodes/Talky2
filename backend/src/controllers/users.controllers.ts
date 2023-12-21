@@ -17,30 +17,30 @@ import ejs from 'ejs'
 import NodeMail from "../helpers/nodeMailer.helper";
 import path from "path";
 
-const dbInstance = DatabaseHelper.getInstance()
+// const dbInstance = DatabaseHelper.getInstance()
 
 
 export const signUp = async (req: Request, res: Response) => {
   try {
     let { userName, fullName, email, password } = req.body;
 
-    let { error } = registerUserSchema.validate(req.body);
+    // let { error } = registerUserSchema.validate(req.body);
 
-    if (error) {
-      return res.status(404).json({ error: error.details });
-    }
-    const emailTaken = (
-      await dbInstance.query(`SELECT * FROM users where email = '${email}'`)
-    ).recordset;
+    // if (error) {
+    //   return res.status(404).json({ error: error.details });
+    // }
+    // const emailTaken = (
+    //   await DatabaseHelper.query(`SELECT * FROM users where email = '${email}'`)
+    // ).recordset;
 
-    if (!isEmpty(emailTaken)) {
-      return res.json({ error: "There is an existing account with that email kindly try to login" });
-    }
+    // if (!isEmpty(emailTaken)) {
+    //   return res.json({ error: "There is an existing account with that email kindly try to login" });
+    // }
 
     let id = v4();
     const hashedPwd = await bcrypt.hash(password, 5);
 
-    let result = await dbInstance.exec("signUpuser", {
+    let result = await DatabaseHelper.exec("signUpuser", {
       id,
       fullName,
       userName,
@@ -59,8 +59,8 @@ export const signUp = async (req: Request, res: Response) => {
     }
 
 
-  } catch (error) {
-    console.log(error);
+  } catch (error:any) {
+    return res.status(500).json({error:error})
   }
 };
 
@@ -70,12 +70,12 @@ export const loginUser = async (req: Request, res: Response) => {
 
     let { email, password } = req.body;
 
-    let user = (await dbInstance.exec('getUserbyEmail', { email, password }))
+    let user = (await DatabaseHelper.exec('getUserbyEmail', { email, password }))
     console.log(user)
 
-    if (!user.recordset.length) {
-      return res.status(401).json({ error: "Invalid credentials" });
-    }
+    // if (!user.recordset.length) {
+    //   return res.status(401).json({ error: "Invalid credentials" });
+    // }
 
     const { password: storedPassword, ...rest } = user.recordset[0];
     console.log(rest)
@@ -92,15 +92,15 @@ export const loginUser = async (req: Request, res: Response) => {
 
     return res.status(200).json({ message: "LogIn successful", token, email, role: rest.role,id:rest.id });
 
-  } catch (error) {
-
+  } catch (error:any) {
+    return res.status(500).json({error:error.message})
   }
 }
 
 export const getAUserById = async (req: ExtendedUser, res: Response) => {
   try {
     const { id } = req.params
-    let user: IUserDetails= (await dbInstance.exec('getAUserById', { id })).recordset[0]
+    let user: IUserDetails= (await DatabaseHelper.exec('getAUserById', { id })).recordset[0]
     if (!user) {
       return res.status(404).json({ message: "No user found" });
     }
@@ -116,7 +116,7 @@ export const getSignedInUser = async (req: ExtendedUser, res: Response) => {
   try {
     const id = req!.info?.id! as string
     console.log(req!.info?.id)
-    let user: IUserDetails = (await dbInstance.exec('getAUserById', { id })).recordset[0]
+    let user: IUserDetails = (await DatabaseHelper.exec('getAUserById', { id })).recordset[0]
     if (!user) {
       return res.status(404).json({ message: "No user found" });
     }
@@ -132,7 +132,7 @@ export const getSignedInUser = async (req: ExtendedUser, res: Response) => {
 export const getAllUsers = async (req: ExtendedUser, res: Response) => {
   try {
     const userIdToDelete = req.info?.id;
-    let users: IUserDetails[] = (await dbInstance.exec('getAllUsers')).recordset
+    let users: IUserDetails[] = (await DatabaseHelper.exec('getAllUsers')).recordset
     console.log(users);
     if (!users.length) {
       return res.status(404).json({ message: "no users found" })
@@ -159,13 +159,13 @@ export const updateUser = async (req: ExtendedUser, res: Response) => {
     // if (!userName ||!profileImageUrl || !bio) {
     //   return res.status(400).json({ message: 'required values are missing kindly check again' })
     // }
-    let user: User = await (await dbInstance.exec('getAUserById', { id })).recordset[0]
+    let user: User = await (await DatabaseHelper.exec('getAUserById', { id })).recordset[0]
     if (!user) {
       return res.status(404).json({ message: 'The user does not exist' });
 
     }
 
-    await dbInstance.exec('updateUser', { id:id, userName:userName, email:email, bio:bio, profileImageUrl:profileImageUrl,password:password })
+    await DatabaseHelper.exec('updateUser', { id:id, userName:userName, email:email, bio:bio, profileImageUrl:profileImageUrl,password:password })
     return res.status(200).json({ message: "the user's details was updated successfully " })
 
   }
@@ -185,7 +185,7 @@ export const forgotPassword = async (req: Request, res: Response) => {
 
     //get user by email
 
-    const user: IUserDetails =  await (await dbInstance.query(`SELECT * FROM users where email = '${email}'`)).recordset[0]
+    const user: IUserDetails =  await (await DatabaseHelper.query(`SELECT * FROM users where email = '${email}'`)).recordset[0]
     console.log(user)
 
     if (user) {
@@ -201,8 +201,8 @@ export const forgotPassword = async (req: Request, res: Response) => {
       const token = jwt.sign({ id: user.id, password: newPassword }, process.env.SECRET_KEY as string, { expiresIn: '70000s' })
       //save the token to the database
 
-      await dbInstance.query(`UPDATE users SET resetToken = '${newPassword}' WHERE email = '${email}'`);
-      const user2: IUserDetails =  await (await dbInstance.query(`SELECT * FROM users where email = '${email}'`)).recordset[0]
+      await DatabaseHelper.query(`UPDATE users SET resetToken = '${newPassword}' WHERE email = '${email}'`);
+      const user2: IUserDetails =  await (await DatabaseHelper.query(`SELECT * FROM users where email = '${email}'`)).recordset[0]
       console.log(user2)
       const resetLink = `http://localhost:4200/appreset/${token}`;
 
@@ -254,7 +254,7 @@ export const resetPassword = async (req: Request, res: Response) => {
     const hashedpassword = await bcrypt.hash(newPassword, 10)
 
 
-    const result = await dbInstance.query(`SELECT * FROM users WHERE resetToken = '${resetToken}'`)
+    const result = await DatabaseHelper.query(`SELECT * FROM users WHERE resetToken = '${resetToken}'`)
    
 
    
@@ -262,7 +262,7 @@ export const resetPassword = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Invalid or expired token' });
     }
 
-    await dbInstance.query(`UPDATE users SET password = '${hashedpassword}', resetToken = NULL, resetTokenExpiry = NULL WHERE resetToken = '${resetToken}'`);
+    await DatabaseHelper.query(`UPDATE users SET password = '${hashedpassword}', resetToken = NULL, resetTokenExpiry = NULL WHERE resetToken = '${resetToken}'`);
    
  
     return res.status(201).json({ message: 'Password reset successful.' })

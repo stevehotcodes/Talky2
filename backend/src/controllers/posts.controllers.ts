@@ -6,7 +6,7 @@ import DatabaseHelper from "../helpers/dbConnection.helper";
 import {  IPosts, IPostsWithUserDetails } from '../interfaces/posts.interface';
 import { ICommentWithUserAndPostInfo } from '../interfaces/comments.interface';
 
-const dbInstance = DatabaseHelper.getInstance()
+// const dbInstance = DatabaseHelper.getInstance()
 
 
 
@@ -24,7 +24,7 @@ export const createNewPost = async (req: ExtendedUser, res: Response) => {
             return res.status(400).json({ error: "'postImageUrl' is required." });
           }
 
-        let result = await dbInstance.exec("createNewPost", {
+        let result = await DatabaseHelper.exec("createNewPost", {
             id,
             postImageUrl,
             postContent,
@@ -33,7 +33,7 @@ export const createNewPost = async (req: ExtendedUser, res: Response) => {
         });
 
         console.log(result);
-        return res.status(201).json( {message:"Post created succesfully",postId:id})
+        return res.status(201).json( {message:"Post created successfully",postId:id})
 
 
     } catch (error: any) {
@@ -48,7 +48,7 @@ export const createNewPost = async (req: ExtendedUser, res: Response) => {
 export const getAllPost = async (req: ExtendedUser, res: Response) => {
     try {
 
-        const posts:IPostsWithUserDetails[] = await (await dbInstance.exec('getAllPosts')).recordset
+        const posts:IPostsWithUserDetails[] = await (await DatabaseHelper.exec('getAllPosts')).recordset
         if (!posts.length) {
             return res.status(404).json({ message: "No posts found" });
         }
@@ -69,7 +69,7 @@ export const getPostsByUser = async (req: ExtendedUser, res: Response) => {
     try {
 
         let userID=req.info?.id as string
-        const posts: IPostsWithUserDetails[] = await (await dbInstance.exec('getPostsByUser',{userID})).recordset
+        const posts: IPostsWithUserDetails[] = await (await DatabaseHelper.exec('getPostsByUser',{userID})).recordset
         if (!posts.length) {
             return res.status(404).json({ message: "No posts found" });
         }
@@ -95,14 +95,14 @@ export const deletePost = async (req: ExtendedUser, res: Response) => {
         const { id } = req.params
         const userID = req!.info?.id as string
         //check whether the question has been deleted
-        let post:IPosts=(await dbInstance.exec('getOnePost',{id})).recordset[0]
+        let post:IPosts=(await DatabaseHelper.exec('getOnePost',{id})).recordset[0]
         console.log(post)
 
         if(!post){
             return res.status(404).json({message:"the post does not exist"})
         }
         
-        await dbInstance.exec('deletePost', {id})
+        await DatabaseHelper.exec('deletePost', {id})
         return res.status(200).json('post deleted successful')
     }
 
@@ -117,8 +117,8 @@ export const deletePost = async (req: ExtendedUser, res: Response) => {
 export const getOnePost =async(req:Request , res:Response)=>{
     try{
         let {id}=req.params
-        let post:IPostsWithUserDetails[] =(await dbInstance.exec('getOnePost',{id})).recordset
-        let comments:ICommentWithUserAndPostInfo[] = (await dbInstance.exec('getAllComments', { postID:id })).recordset;
+        let post:IPostsWithUserDetails[] =(await DatabaseHelper.exec('getOnePost',{id})).recordset
+        let comments:ICommentWithUserAndPostInfo[] = (await DatabaseHelper.exec('getAllComments', { postID:id })).recordset;
         post?console.log("here is the post your are trying to fetch",post):console.log("no post found")
         if(!post){
             return res.status(404).json({message:"post was not found"})

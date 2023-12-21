@@ -7,7 +7,7 @@ import { IPosts } from '../interfaces/posts.interface';
 import { IPostLike, IPostLikeCount } from '../interfaces/postLikes.interface';
 
 
-const dbInstance=DatabaseHelper.getInstance()
+// const dbInstance=DatabaseHelper.getInstance()
 
 
 export const addLikeToPost = async (req: ExtendedUser, res: Response) => {
@@ -17,18 +17,18 @@ export const addLikeToPost = async (req: ExtendedUser, res: Response) => {
       let { postID } = req.params;
   
       // Check whether the post exists; if not, prevent like
-      let post: IPosts = (await dbInstance.exec('getOnePost', { id: postID })).recordset[0];
+      let post: IPosts = (await DatabaseHelper.exec('getOnePost', { id: postID })).recordset[0];
   
       if (!post) {
         return res.status(404).json({ message: "The post does not exist" });
       }
   
       // Check whether the user has already liked the post
-      let likeByUser: IPostLike = (await dbInstance.exec('getLikeByUserID', { userID, postID })).recordset[0];
+      let likeByUser: IPostLike = (await DatabaseHelper.exec('getLikeByUserID', { userID, postID })).recordset[0];
   
       if (!likeByUser) {
         // If the user has not liked the post, add the like
-        await dbInstance.exec('addLikeToPost', { id, userID, postID });
+        await DatabaseHelper.exec('addLikeToPost', { id, userID, postID });
         return res.status(201).json({ message: "Post was liked" });
       } else {
         // If the user has already liked the post, return an error
@@ -46,14 +46,14 @@ export const getLikesofAPost=async(req:ExtendedUser,res:Response)=>{
          
             let {postID}=req.params
             //check whether the post is deleted
-            let post:IPosts=(await dbInstance.exec('getOnePost',{id:postID})).recordset[0]
+            let post:IPosts=(await DatabaseHelper.exec('getOnePost',{id:postID})).recordset[0]
             console.log(post)
     
             if(!post){
                 return res.status(404).json({message:"the post does not exist,so cannot get the likes"})
             }
 
-            let likes:IPostLikeCount[]= (await dbInstance.exec('getLikesofAPost',{postID})).recordset
+            let likes:IPostLikeCount[]= (await DatabaseHelper.exec('getLikesofAPost',{postID})).recordset
 
             return res.status(201).json(likes);
             

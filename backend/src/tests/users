@@ -1,0 +1,169 @@
+// import mssql from 'mssql'
+// import bcrypt from 'bcrypt'
+// import jwt from 'jsonwebtoken'
+// import {v4} from 'uuid'
+// import{Request,Response}from 'express'
+// import dbhelper from '../helpers/dbConnection.helper'
+// import { signUp } from '../controllers/users.controllers'
+// import exec from '../helpers/dbConnection.helper'
+// import DatabaseHelper from '../helpers/dbConnection.helper'
+
+// //mock the execute stored procedure from the database
+// jest.mock("../helpers/dbConnection.helper")
+
+// //Mock the password
+
+// describe("User Controllers",()=>{
+//     it("should register  a user",async()=>{
+//         //Arrange
+//         const req:any={
+//             body:{
+//                 userName:"fake user",
+//                 fullName:"fake full name",
+//                 email:"user@gmail.com",
+//                 password:"hashedPassword",
+
+//             },
+//         } as any
+//         const res:any={
+//             status:jest.fn().mockReturnThis(),
+//             json:jest.fn()
+
+//         } as any
+//         //Mock  or spy the hashPassword function to return a mock password 
+//         jest.spyOn(bcrypt, 'hash').mockResolvedValue('testPassword' as never);
+//         (exec as unknown as jest.Mock).mockResolvedValue({
+//             rowsAffected: [1] as number[],
+//         })
+
+//         //Act
+//          const result =await signUp(req,res);
+
+//         //Assert
+        
+//         // expect(res.json).toHaveBeenCalledWith({ message: "Acccount created  successfully"})
+//         // expect(res.status).toHaveBeenCalledWith(201)
+        
+
+
+
+
+
+//     })
+// })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // describe('User Controller Tests',()=>{
+// //     //arrange
+// //     let res:Response
+
+    
+// //         res={
+// //             status:jest.fn().mockReturnThis(),
+// //             json:jest.fn().mockReturnThis(),
+// //         } as unknown as Response;
+    
+
+// //     it('successfully registers a user',async()=>{
+// //         const req={
+// //             body:{
+// //                 userName:'Stephen theQA', 
+// //                 fullName:'Ondieki Stephen',
+// //                 email:'ondiekistephentheQA@gmail.com', 
+// //                 password:'hashpassword'
+// //             }
+// //         } as unknown as Request;
+
+// //         jest.spyOn(bcrypt,'hash').mockResolvedValueOnce('hashpassword' as never);
+// //         (DatabaseHelper.exec as jest.Mock)).mockResolvedValueOnce({
+// //             rowsAffected:[1] as number []
+// //         })
+// //       await signUp(req ,res)
+// //             expect(res.status).toHaveBeenCalledWith(201)
+// //         expect(res.status).toBe(201);
+// //         expect(res.json).toHaveBeenCalledWith({message: "Acccount created  successfully"});
+
+        
+
+// //     })
+
+
+
+
+// // })
+
+// // jest.mock('../helpers/dbConnection.helper');
+
+// // describe('User Controller Tests', () => {
+// //     let req: Request;
+// //     let res: Response;
+
+// //     beforeEach(() => {
+// //         req = {
+// //             body: {
+// //                 userName: 'testUser',
+// //                 fullName: 'Test User',
+// //                 email: 'test@example.com',
+// //                 password: 'testPassword',
+// //             },
+// //         } as Request;
+
+// //         res = {
+// //             status: jest.fn().mockReturnThis(),
+// //             json: jest.fn().mockReturnThis(),
+// //         } as unknown as Response;
+
+// //         jest.spyOn(bcrypt, 'hash').mockResolvedValue('testPassword' as never);
+// //     });
+
+// //     it('registers a user successfully', async () => {
+// //         ((DatabaseHelper.exec as jest.Mock)).mockResolvedValueOnce({
+// //             rowsAffected: [1] as number[],
+// //         });
+
+// //         await signUp(req, res);
+
+// //         expect(res.status).toHaveBeenCalledWith(201);
+// //         expect(res.json).toHaveBeenCalledWith({ message: 'Account created successfully' });
+// //     });
+
+// //     it('handles registration failure', async () => {
+// //         ((DatabaseHelper.exec as jest.Mock)).mockResolvedValueOnce({
+// //             rowsAffected: [0] as number[],
+// //         });
+
+// //         await signUp(req, res);
+
+// //         expect(res.status).toHaveBeenCalledWith(500);
+// //         expect(res.json).toHaveBeenCalledWith({ message: 'Failed to create an account' });
+// //     });
+
+// //     it('handles internal server error', async () => {
+// //         ((DatabaseHelper.exec as jest.Mock)).mockRejectedValueOnce(new Error('Database error'));
+
+// //         await signUp(req, res);
+
+// //         expect(res.status).toHaveBeenCalledWith(500);
+// //         expect(res.json).toHaveBeenCalledWith({ message: 'Internal server error' });
+// //     });
+// // });
+// // // Import statements...
+
+
