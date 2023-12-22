@@ -22,10 +22,12 @@ export default function () {
 
 
 let response= http.post("http://localhost:3400/users/login",body,params)
+console.log('Response Body',`${response.body}`)
  
 check(response,{
     'is status 200?':(response)=>response.status==200,
-    'is successfully logged in?':response.body.includes('LogIn successful')
+    'is successfully logged in?':response.body.includes('LogIn successful'),
+    'contains "token"': (response)=>response.body.includes("token")
 })
 
 sleep(1)

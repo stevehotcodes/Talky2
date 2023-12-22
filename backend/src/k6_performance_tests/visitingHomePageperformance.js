@@ -3,7 +3,8 @@ import{sleep,check} from 'k6'
 
 export let options={
     vus:20,
-    duration:'1s'
+    duration:'1s',
+    
 }
 
 export default function () {

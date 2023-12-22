@@ -54,7 +54,7 @@ export const signUp = async (req: Request, res: Response) => {
       })
     } else {
       return res.status(201).json({
-        message: "Acccount created  successfully"
+        message: "Account created successfully"
       })
     }
 

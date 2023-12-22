@@ -11,7 +11,7 @@ export default function () {
     
     fullName:"Daniel Kitheka",
     userName:"Dk12",   
-     email:"daniel@yopmial.com",
+     email:"daniel2@yopmial.com",
      password:"12345678"
     })
 

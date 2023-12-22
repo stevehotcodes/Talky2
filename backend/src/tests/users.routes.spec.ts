@@ -11,8 +11,8 @@ describe('Performs tests on the Authentication endpoints', () => {
     return  await request(app)
       .post('/users/signup')
       .send({
-        "fullName":"Alamin",
-        "userName":"Alamin001",
+        "fullName":"Alamin1",
+        "userName":"Alamin0021",
         "email":"Alamin@gmail.com",
         "password":"12345678"
         
