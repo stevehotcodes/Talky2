@@ -36,8 +36,8 @@ describe('First', () => {
 
     it('logins a new user',()=>{
         cy.visit('http://localhost:4200/login')
-        cy.get('[data-cy=email]').type('jondoe@gmail.com')
-        cy.get('[data-cy=password]').type('JohnDoe123@')
+        cy.get('[data-cy=email]').type('Alamin@gmail.com')
+        cy.get('[data-cy=password]').type('12345678')
         cy.get('[data-cy="login"]').click()
 
     })
@@ -103,14 +103,14 @@ describe('First', () => {
         cy.go('back')
       })
 
-      it('should view my and edit profile',()=>{
+      it('should view and edit profile',()=>{
         cy.visit('http://localhost:4200/profile')
         cy.get('#edit-profile').click()
         cy.get('#post-create-container').should('be.visible').then(()=>{
             cy.get('#post-create-container').find("#username").type("fake username")
-            cy.get('#post-create-container',).find("#email").type(" fake email",{force: true})
-            cy.get('#post-create-container').find("#bio").type("fake bio")
-            cy.get('#post-create-container').find("#password").type( " fake password")
+            // cy.get('#post-create-container',).find("#email").type(" fake email",{force: true})
+            cy.get("#bio").type("fake bio")
+            cy.get('#post-create-container').find("#password").type(" fake password")
             const filePath = 'cypress/fixtures/cat-8282097_1280.jpg';
             cy.get('input[type=file]').selectFile(filePath);
             cy.get("#edit-btn").click()
@@ -119,9 +119,19 @@ describe('First', () => {
 
 
         });
+
+        
         
        
       })
+
+      it('should search for other talkies',()=>{
+        cy.visit("http://localhost:4200/talkies")
+        cy.get("#default-search").type("perez")
+      
+
+      
+    })
   
 
 
@@ -129,4 +139,4 @@ describe('First', () => {
     })
 
 
-  
+  9

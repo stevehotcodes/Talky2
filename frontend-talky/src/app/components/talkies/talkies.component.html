@@ -48,12 +48,12 @@
             </div>
         </div>
         
-        <div class=" post-search-container flex flex-col " >
+        <div class="post-search-container flex flex-col " >
 
             <h3 class="sticky top-0 bg-white p-4 z-50  w-[100%] font font-bold
             ">People you may  know </h3>   
        <div class="search-add-icon-wrapper flex justify-center items-center  border   bg-white mt-0 w-[100%]  ">
-        <form >   
+        <!-- <form >    -->
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -61,11 +61,14 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <input type="search" id="default-search" class="block w-[30rem]  mt-[17px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="search talkies" required>
-                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" [(ngModel)]="searchText">Search</button>
+                <input type="text" id="default-search" class="block w-[30rem]  mt-[17px] p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="search talkies" [(ngModel)]="searchText" >
+                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Search</button>
+                
             </div>
-        </form>
-      
+            
+            <p>filtered talkies by: {{searchText}}</p>
+        <!-- </form> -->
+        <!-- <input type="text" name="" id=""  placeholder="search"> -->
         <!-- <svg class="mt-2 pl-2"xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" viewBox="0 0 20 20"><path fill="#0E2A47" d="M11 9V5H9v4H5v2h4v4h2v-4h4V9h-4zm-1 11a10 10 0 1 1 0-20a10 10 0 0 1 0 20z"/></svg> -->
        </div>    
     
@@ -76,7 +79,7 @@
     
         <div class="people-profile-cards  flex  flex-col  items-center p-6 mt-4 bg-white  justify-around gap-x-[0.21rem] border border-gray-100 w-[15rem]  h-[15rem]" *ngFor="let talkie of talkies|search:searchText; let i=index">
             <img src="{{talkie.profileImageUrl}}" alt="no profile pic" class="w-[70px] ">
-            <a  (mouseover)="openDialog()">{{talkie.userName}}</a>
+            <a  (mouseover)="openDialog(talkie.id)">{{talkie.userName}}</a>
             <button type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery bg-[#0E2A47] text-white " (click)="toggleFollowingState(talkie.id)" > {{ getButtonText(talkie.id) }}</button>
             <!-- <button  type="submit" class="text-sm rounded-full py-1.5 px-3.5 bg-secondery bg-[#0E2A47] text-white " (click)="unfollowerThisUser(talkie.id,i)" *ngIf="isFollowing"> unFollow</button> -->
         </div>         

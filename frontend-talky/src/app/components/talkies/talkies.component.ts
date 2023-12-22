@@ -12,7 +12,8 @@ import { FollowersService } from 'src/app/services/followers.service';
 })
 export class TalkiesComponent implements OnInit{
   talkies:IUserDetails[]=[]
-  searchText='';
+  filteredTalkiesArray:IUserDetails[]=[]
+  _searchText:string='';
   isFollowing:boolean =false
   followingStates: { [followingID: string]: boolean } = {};
 
@@ -34,7 +35,7 @@ export class TalkiesComponent implements OnInit{
      )
   }
 
-  openDialog(){
+  openDialog(id:string){
     this.matDialog.open(ViewProfileComponent,{
       width:'500px'
     })
@@ -120,6 +121,24 @@ updateFollowStateOnServer(followingID:string,actionType:string){
   // toggleFolowingEvent(i:number){
   //   this.isFollowing=!this.isFollowing
   // }
+   tagFilter(filterBy:string){
+    filterBy=filterBy.toLowerCase()
+    return this.talkies.filter((talky)=>{
+      talky.userName.toLowerCase().includes(filterBy)
+    })
+   }
 
+    get searchText(){
+      return this._searchText
+    }
+
+    set searchText(value:string){
+      this._searchText=value
+      console.log("this is the setter value",value);
+      this.filteredTalkiesArray=this.tagFilter(value)
+      console.log('this is the filter array', this.filteredTalkiesArray)
+
+
+    }
 
 }
